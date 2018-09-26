@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://antel.com.uy/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:ns1="http://schemas.xmlsoap.org/soap/http" name="WebServiceServletService" targetNamespace="http://antel.com.uy/">
+  <wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://antel.com.uy/" elementFormDefault="unqualified" targetNamespace="http://antel.com.uy/" version="1.0">
+
+  <xs:element name="eco" type="tns:eco"/>
+
+  <xs:element name="ecoResponse" type="tns:ecoResponse"/>
+
+  <xs:complexType name="eco">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="arg0" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+  <xs:complexType name="ecoResponse">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="return" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+
+</xs:schema>
+  </wsdl:types>
+  <wsdl:message name="eco">
+    <wsdl:part element="tns:eco" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="ecoResponse">
+    <wsdl:part element="tns:ecoResponse" name="parameters">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="WebServiceServlet">
+    <wsdl:operation name="eco">
+      <wsdl:input message="tns:eco" name="eco">
+    </wsdl:input>
+      <wsdl:output message="tns:ecoResponse" name="ecoResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="WebServiceServletServiceSoapBinding" type="tns:WebServiceServlet">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="eco">
+      <soap:operation soapAction="" style="document"/>
+      <wsdl:input name="eco">
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="ecoResponse">
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="WebServiceServletService">
+    <wsdl:port binding="tns:WebServiceServletServiceSoapBinding" name="WebServiceServletPort">
+      <soap:address location="http://localhost:8080/servlet-imm/eco"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

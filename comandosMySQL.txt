@@ -1,0 +1,87 @@
+Creación de bases de datos---------------------------------------------
+-----------------------------------------------------------------------
+
+
+Base de datos de la intendencia-----------------------------------------
+------------------------------------------------------------------------
+IMPORTANTE: debe agregarse una fila a la tabla de secuencias, es--------
+el comando «insert into secuencias values('tickets', 0);» al final------
+------------------------------------------------------------------------
+create database intendencia;
+use intendencia;
+create table tickets (idTicket INT NOT NULL PRIMARY KEY,
+ matricula VARCHAR(10),
+ fechaHoraVenta DATETIME,
+ fechaHoraInicio DATETIME,
+ minutos INT,
+ agencia VARCHAR(20),
+ importe DECIMAL(10,2),
+ anulado BOOLEAN);
+create table secuencias (tabla VARCHAR(40), ident INT(11));
+insert into secuencias values('tickets', 0);
+
+Base de datos de la agencia---------------------------------------------
+------------------------------------------------------------------------
+create database agencia;
+use agencia;
+create table tickets (idTicket INT NOT NULL PRIMARY KEY,
+ matricula VARCHAR(10),
+ fechaHoraVenta DATETIME,
+ terminal VARCHAR(20),
+ importe DECIMAL(10,2),
+ anulado BOOLEAN);
+------------------------------------------------------------------------
+
+Para mostrar las estructuras creadas------------------------------------
+------------------------------------------------------------------------
+use intendencia;
+describe tickets;
+describe secuencias;
+
+use agencia;
+describe tickets;
+
+Ejemplo de cómo deben quedar las estructuras de tabla-------------------
+------------------------------------------------------------------------
+mysql> use intendencia;
+Database changed
+mysql> describe tickets;
++-----------------+---------------+------+-----+---------+-------+
+| Field           | Type          | Null | Key | Default | Extra |
++-----------------+---------------+------+-----+---------+-------+
+| idTicket        | int(11)       | NO   | PRI | NULL    |       |
+| matricula       | varchar(10)   | YES  |     | NULL    |       |
+| fechaHoraVenta  | datetime      | YES  |     | NULL    |       |
+| fechaHoraInicio | datetime      | YES  |     | NULL    |       |
+| minutos         | int(11)       | YES  |     | NULL    |       |
+| agencia         | varchar(20)   | YES  |     | NULL    |       |
+| importe         | decimal(10,2) | YES  |     | NULL    |       |
+| anulado         | tinyint(1)    | YES  |     | NULL    |       |
++-----------------+---------------+------+-----+---------+-------+
+8 rows in set (0.06 sec)
+
+mysql> describe secuencias;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| tabla | varchar(40) | YES  |     | NULL    |       |
+| ident | int(11)     | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+2 rows in set (0.05 sec)
+
+mysql> use agencia;
+Database changed
+mysql> describe tickets;
++----------------+---------------+------+-----+---------+-------+
+| Field          | Type          | Null | Key | Default | Extra |
++----------------+---------------+------+-----+---------+-------+
+| idTicket       | int(11)       | NO   | PRI | NULL    |       |
+| matricula      | varchar(10)   | YES  |     | NULL    |       |
+| fechaHoraVenta | datetime      | YES  |     | NULL    |       |
+| terminal       | varchar(20)   | YES  |     | NULL    |       |
+| importe        | decimal(10,2) | YES  |     | NULL    |       |
+| anulado        | tinyint(1)    | YES  |     | NULL    |       |
++----------------+---------------+------+-----+---------+-------+
+6 rows in set (0.05 sec)
+
+mysql>
